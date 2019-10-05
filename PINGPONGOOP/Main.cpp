@@ -40,9 +40,16 @@ int main()
 			//	window.close();
 			//	window.create(mode,"TEST");
 			//}
-			player1.MovementControl(time.getElapsedTime().asSeconds());
-			player2.MovementControl2(time2.getElapsedTime().asSeconds());
+			if (Keyboard::isKeyPressed(Keyboard::W) || Keyboard::isKeyPressed(Keyboard::S))
+			{
+				player1.MovementControl(time.getElapsedTime().asSeconds());
+			}
+			if (Keyboard::isKeyPressed(Keyboard::Up) || Keyboard::isKeyPressed(Keyboard::Down))
+			{
+				player2.MovementControl2(time2.getElapsedTime().asSeconds());
+			}
 		}
+		
 		window.clear();
 		window.draw(player1.getShape());
 		window.draw(player2.getShape());

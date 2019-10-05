@@ -33,11 +33,11 @@ void Player::MovementControl(float DeltaTime)
 {
 	if (Keyboard::isKeyPressed(Keyboard::W))
 	{
-		Velocity = (Velocity - DeltaTime)*1.3f;
+		Velocity = (Velocity - DeltaTime)*0.3f;
 	}
 	if (Keyboard::isKeyPressed(Keyboard::S))
 	{
-		Velocity = (Velocity +DeltaTime) * 1.3f;
+		Velocity = (Velocity +DeltaTime) * 0.3f;
 	}
 	if (Velocity > MaxSpeed)
 	{
