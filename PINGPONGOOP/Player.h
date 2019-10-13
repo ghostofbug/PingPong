@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "PlayGround.h"
 using namespace sf;
 using namespace std;
 class Player
@@ -14,7 +15,7 @@ public:
 	Player(VideoMode& mode);
 	~Player();
 	RectangleShape getShape();
-	void MovementControl(float DeltaTime);
+	void MovementControl();
 	void SetVelocity();
 	
 };

@@ -16,7 +16,7 @@ RectangleShape Player2::getShape()
 }
 Player2::Player2(VideoMode& mode)
 {
-	PlayerShape.setSize(Vector2f(100, 50));
+	PlayerShape.setSize(Vector2f(mode.width*0.06f, 50));
 	PlayerShape.setFillColor(Color::White);
 	PlayerShape.setScale(Vector2f(1, 0.2f));
 	PlayerShape.setOrigin(Vector2f(PlayerShape.getSize().x / 2, PlayerShape.getSize().y / 2));
@@ -25,23 +25,25 @@ Player2::Player2(VideoMode& mode)
 	Velocity2 = 0;
 }
 
-void Player2::MovementControl2(float DeltaTime)
+void Player2::MovementControl()
 {
+	Velocity = 2.0f;
 	if (Keyboard::isKeyPressed(Keyboard::Up))
 	{
-		this->Velocity2 = (Velocity2 - DeltaTime) * 0.3f;
+		Velocity = Velocity * -6.3f;
 	}
-	if (Keyboard::isKeyPressed(Keyboard::Down))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
-		Velocity2 = (Velocity2 + DeltaTime) * 0.3f;
+		Velocity = Velocity * 6.3f;
 	}
-	if (Velocity2 > MaxSpeed)
+	if (Velocity > 25.0f)
 	{
-		Velocity2 = MaxSpeed;
+		Velocity = 25.0f;
 	}
-	if (Velocity2 < -MaxSpeed)
+	if (Velocity < -25.0f)
 	{
-		Velocity2 = -MaxSpeed;
+		Velocity = -25.0f;
 	}
-	this->PlayerShape.move(0, Velocity2 * DeltaTime);
+	PlayerShape.move(0, Velocity);
 }
+

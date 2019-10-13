@@ -8,48 +8,52 @@ using namespace sf;
 int main()
 {
 	Clock time;
+	Time time1;
 	Clock time2;
-	VideoMode mode(1920,1080);
-	mode = VideoMode::getDesktopMode();
-	RenderWindow window(mode, "TEST",Style::Fullscreen);
+	VideoMode mode(1920, 1080);
+	//mode = VideoMode::getDesktopMode();
+	RenderWindow window(mode, "TEST");
 	window.setFramerateLimit(60);
 	PlayGround playground;
 	Event event;
-	cout << mode.height << endl;
 	cout << "nhap esc de thoat" << endl;
 	Player player1(mode);
 	Player2 player2(mode);
+	list<RectangleShape>::iterator i;
+	for (i = playground.GetList().begin(); i != playground.GetList().end(); i++)
+	{
+
+	}
 	while (window.isOpen())
 	{
-		Event event;
 		while (window.pollEvent(event))
 		{
-			if (event.type == Event::Closed)
+			switch (event.type)
+			{
+			case Event::Closed:
 			{
 				window.close();
+				break;
 			}
-			if (Keyboard::isKeyPressed(Keyboard::Escape))
-			{
-				window.close();
-			}
-			//if (Keyboard::isKeyPressed(Keyboard::W))
-			//{
 
-			//	mode.height = 800;
-			//	mode.width = 600;
-			//	window.close();
-			//	window.create(mode,"TEST");
-			//}
-			if (Keyboard::isKeyPressed(Keyboard::W) || Keyboard::isKeyPressed(Keyboard::S))
+			case Event::KeyPressed:
 			{
-				player1.MovementControl(time.getElapsedTime().asSeconds());
+				if (Keyboard::isKeyPressed(Keyboard::Escape))
+				{
+					window.close();
+				}
+				if (Keyboard::isKeyPressed(Keyboard::W) || Keyboard::isKeyPressed(Keyboard::S))
+				{
+					player1.MovementControl();
+				}
+				if (Keyboard::isKeyPressed(Keyboard::Up) || Keyboard::isKeyPressed(Keyboard::Down))
+				{
+					player2.MovementControl();
+				}
+				break;
 			}
-			if (Keyboard::isKeyPressed(Keyboard::Up) || Keyboard::isKeyPressed(Keyboard::Down))
-			{
-				player2.MovementControl2(time2.getElapsedTime().asSeconds());
 			}
 		}
-		
 		window.clear();
 		window.draw(player1.getShape());
 		window.draw(player2.getShape());

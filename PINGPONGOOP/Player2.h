@@ -1,6 +1,6 @@
 #pragma once
 #include "Player.h"
-class Player2
+class Player2:public Player
 {
 private:
 	RectangleShape PlayerShape;
@@ -10,6 +10,6 @@ public:
 	Player2();
 	RectangleShape getShape();
 	Player2(VideoMode &mode);
-	void MovementControl2(float DeltaTime);
+	void MovementControl();
 };
 
