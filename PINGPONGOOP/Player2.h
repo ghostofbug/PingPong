@@ -10,6 +10,6 @@ public:
 	Player2();
 	RectangleShape getShape();
 	Player2(VideoMode &mode);
-	void MovementControl();
+	void MovementControl(RectangleShape& leftbound, RectangleShape& rightbound, double DeltaTime);
 };
 

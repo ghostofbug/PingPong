@@ -19,7 +19,7 @@ Player::Player()
 }
 Player::Player(VideoMode& mode)
 {
-	PlayerShape.setSize(Vector2f(mode.width*0.06f, 50));
+	PlayerShape.setSize(Vector2f(mode.width*0.08f, 50));
 	PlayerShape.setFillColor(Color::Blue);
 	PlayerShape.setScale(Vector2f(1, 0.2f));
 	PlayerShape.setOrigin(Vector2f(PlayerShape.getSize().x / 2, PlayerShape.getSize().y / 2));
@@ -36,29 +36,40 @@ RectangleShape Player::getShape()
 	return PlayerShape;
 }
 
-void Player::MovementControl()
+void Player::MovementControl(RectangleShape &leftbound,RectangleShape &rightbound,double DeltaTime)
 {
-	Velocity = 2.0f;
+	Velocity = 0.5;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
-		Velocity = Velocity * -6.3f;
+		Velocity = Velocity-2.3f;
+		if (PlayerShape.getGlobalBounds().intersects(leftbound.getGlobalBounds()))
+		{
+			Velocity=0;
+			PlayerShape.setPosition(PlayerShape.getPosition());
+		}
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
-		Velocity = Velocity * 6.3f;
+		Velocity = Velocity + 2.3f;
+		if (PlayerShape.getGlobalBounds().intersects(rightbound.getGlobalBounds()))
+		{
+			Velocity = 0;
+			PlayerShape.setPosition(PlayerShape.getPosition());
+		}
 	}
+	if (Velocity > 5.0f)
+	{
+		Velocity = 5.0f;
+	}
+	if (Velocity < -5.0f)
+	{
+		Velocity = -5.0f;
+	}
+	cout << Velocity << endl;
+	
+	PlayerShape.move(0, Velocity * DeltaTime * 5000000);
 
-	if (Velocity > 25.0f)
-	{
-		Velocity = 25.0f;
-	}
-	if (Velocity < -25.0f)
-	{
-		Velocity = -25.0f;
-	}
-	
-	PlayerShape.move(0, Velocity);
-	
-	
+
 }
+	
 

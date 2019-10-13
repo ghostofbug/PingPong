@@ -2,14 +2,14 @@
 
 void PlayGround::DisplayPlayGround(RenderWindow &window)
 {
-	list<RectangleShape>::iterator i;
+	vector<RectangleShape>::iterator i;
 	for (i = PlayWall.begin(); i != PlayWall.end(); i++)
 	{
 		window.draw(*i);
 	}
 }
 
-list<RectangleShape> PlayGround::GetList()
+vector<RectangleShape> PlayGround::GetList()
 {
 	return PlayWall;
 }

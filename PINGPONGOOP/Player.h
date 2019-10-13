@@ -15,7 +15,8 @@ public:
 	Player(VideoMode& mode);
 	~Player();
 	RectangleShape getShape();
-	void MovementControl();
+
+	void MovementControl(RectangleShape& leftbound, RectangleShape& rightbound, double DeltaTime);
 	void SetVelocity();
 	
 };
